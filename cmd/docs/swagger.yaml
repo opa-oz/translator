@@ -1,0 +1,85 @@
+definitions:
+  api.Healz.response:
+    properties:
+      message:
+        example: OK
+        type: string
+    type: object
+  api.Ready.response:
+    properties:
+      message:
+        example: Ready
+        type: string
+    type: object
+  api.TranslateResponse:
+    properties:
+      text:
+        example: test
+        type: string
+    type: object
+info:
+  contact: {}
+paths:
+  /healz:
+    get:
+      consumes:
+      - application/json
+      description: Check health endpoint
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/api.Healz.response'
+      summary: healz
+      tags:
+      - utils
+  /ready:
+    get:
+      consumes:
+      - application/json
+      description: Check readiness
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/api.Ready.response'
+      summary: ready
+      tags:
+      - utils
+  /translate/{name}:
+    post:
+      consumes:
+      - application/json
+      description: Translate input text `fromLang` `toLang`
+      parameters:
+      - description: Translate to language
+        in: path
+        name: toLang
+        required: true
+        type: string
+      - description: Translate from language
+        in: path
+        name: fromLang
+        required: true
+        type: string
+      - default: 0
+        description: Index
+        in: query
+        name: index
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/api.TranslateResponse'
+      summary: translate something
+      tags:
+      - api
+swagger: "2.0"
