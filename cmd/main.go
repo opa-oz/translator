@@ -37,7 +37,7 @@ func main() {
 	rg.Use(middlewares.CfgMiddleware(cfg))
 
 	{
-		rg.GET("/translate/:fromLang/:toLang", api.Translate)
+		rg.POST("/translate/:fromLang/:toLang", api.Translate)
 	}
 
 	port := fmt.Sprintf(":%d", cfg.Port)
